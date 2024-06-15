@@ -1,6 +1,3 @@
-#Step 2: Set Up Lambda Function
-#Create a Lambda function using Terraform:
-
 resource "aws_lambda_function" "csv_processor" {
   filename         = "process_csv.zip"
   function_name    = "${var.environment}-csv-processor"
@@ -11,9 +8,9 @@ resource "aws_lambda_function" "csv_processor" {
 
   environment {
     variables = {
-      BUCKET_NAME = var.s3_bucket
+      BUCKET_NAME = var.s3_bucket_name
       FILE_NAME   = "data.csv"
-      SECRET_NAME = var.db_secret
+      SECRET_NAME = var.secret_name
     }
   }
 
@@ -44,4 +41,27 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
 
 resource "aws_iam_policy" "lambda_s3_policy" {
   name = "${var.environment}-lambda-s3-policy"
-  
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject"
+        ]
+        Resource = "arn:aws:s3:::${var.s3_bucket_name}/*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:GetSecretValue"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+
+  roles = [aws_iam_role.lambda_role.id]
+}
