@@ -25,8 +25,11 @@ candidate will be expected to change the password when they log in for the first
 time. The resources will be retained until we review the challenge.
 Infrastructure task
 ● Using Terraform, provision a small infrastructure consisting of
+
 ○ 1 VPC with private and public subnets using at least 2 AZ
+
 ○ 1 small ec2 instance to host a theoretical application. The instance
+
 should be only accessible from the internet on ssh and http(s) ports
 ○ 1 RDS cluster (Aurora MySQL), that should be only reachable from
 the internal network
