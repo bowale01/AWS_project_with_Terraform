@@ -31,13 +31,18 @@ Infrastructure task
 ○ 1 small ec2 instance to host a theoretical application. The instance
 
 should be only accessible from the internet on ssh and http(s) ports
+
 ○ 1 RDS cluster (Aurora MySQL), that should be only reachable from
 the internal network
+
 ○ 1 S3 bucket configured for storing files containing sensitive data
 ● All additional resources (IAM roles / policies, security groups, etc) should be
 in terraform
+
 ● The terraform code should be easily scalable and highly configurable
+
 ● The terraform state file should be stored in an S3 bucket
+
 ● 2 different configurations should be provided, to apply the code to 2
 different environments (staging and production)
 
@@ -50,9 +55,13 @@ stored in the S3 bucket and exports the content into a database table
 ● The content of the CSV file(s) changes frequently
 ● A script to populate the CSV file(s) is provided with random data. It can be
 adjusted as the candidate sees necessary and should be setup to
+
 ○ store the generated file into the S3 bucket
+
 ○ run every 10 minutes as a cron job or as a lambda
+
 ● The sql statement for creating the Database and DB table is provided
+
 Documentation
 At the end of the challenge the candidate is expected to provide documentation
 explaining their set up and the steps to relaunch the infrastructure via
@@ -61,9 +70,12 @@ what their setup is, or both.
 The candidate is expected to pay as much attention to the quality of the
 documentation as to the quality of the code.
 Some of the things expected from the doc are:
+
 ● The setup in a simple, concise matter
+
 ● Steps to relaunch the infrastructure (assume someone who is unfamiliar
 with the challenge)
+
 ● Assumptions made
 When finished
 When the challenge is done, the candidate should commit their code to our git
